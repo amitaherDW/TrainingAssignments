@@ -1,0 +1,80 @@
+<apex:page showHeader="false" sidebar="false">
+    <apex:includeScript value="//code.jquery.com/jquery-3.4.1.js"/>
+    <html>
+        <head>
+            <title>JS Assignment 2</title>
+            <style>
+                body {
+                	text-align:center;
+                	font-family:sans-serif;
+                	font-size:30px;
+                }
+                .center {
+                	text-align:left;
+                    width:70%; 
+                    margin:10% auto;
+                	border-collapse:collapse;
+                	border:2px solid #000000;
+                }
+                table td, th {
+                	border:2px solid #000000;
+                }
+            </style>
+            
+        </head>
+        <body>
+            <table border="1" style="" class="center" cellpadding="20">
+                <thead>
+                	<tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                    </tr>
+                </thead>
+            	<tbody>
+                    <tr>
+                        <td>001</td>
+                        <td>House Stark</td>
+                        <td>The North</td>
+                    </tr>
+                    <tr>
+                        <td>002</td>
+                        <td>House Tully</td>
+                        <td>Riverlands</td>
+                    </tr>
+                    <tr>
+                        <td>003</td>
+                        <td>House Arryn</td>
+                        <td>Vale</td>
+                    </tr>
+                    <tr>
+                        <td>004</td>
+                        <td>House Lannister</td>
+                        <td>Westerlands</td>
+                    </tr>
+                    <tr>
+                        <td>005</td>
+                        <td>House Targaryen</td>
+                        <td>Bay of Dragons</td>
+                    </tr>
+                    <tr>
+                        <td>006</td>
+                        <td>House Baratheon</td>
+                        <td>Stormlands</td>
+                    </tr>
+                    <tr>
+                        <td>007</td>
+                        <td>House Tyrell</td>
+                        <td>Reach</td>
+                    </tr>
+                </tbody>
+            </table>
+        </body>
+        
+    </html>
+    <script>
+    $(document).ready(function() {
+        $( ".center tr:odd" ).hide();
+    });    
+    </script>
+</apex:page>

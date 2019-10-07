@@ -1,0 +1,126 @@
+<apex:page showHeader="false" sidebar="false">
+    <html>
+        <head>
+            <title>JS Assignment 1</title>
+            <style>
+                body {
+                	text-align:center;
+                	font-family:sans-serif;
+                	font-size:30px;
+                }
+                .smallFont {
+                	font-size:16px;
+                	font-weight: bold;
+                }
+                .largeFont {
+                	font-size:30px;
+                	font-weight: bold;
+                }
+                .center {
+                    width:70%; 
+                    margin:15% auto;
+                	border-collapse:collapse;
+                	border:2px solid #000000;
+                }
+                table td {
+                	border:2px solid #000000;
+                }
+            </style>
+            
+        </head>
+        <body>
+            <table class="center" cellpadding="20">
+            	<tbody>
+                    <span></span>
+                    <tr class="smallFont">
+                        <!-- TD element to display Date --> 
+                        <td><label>Date: </label><span id="dateContainer"/></td>
+                        <!-- TD element to display Day --> 
+                        <td><label>Day: </label><span id="dayContainer"/></td>
+                    </tr>
+                    <tr class="largeFont">
+                        <!-- TD element to display live time --> 
+                        <td colspan="2"><span id="timeContainer"/><span /></td>
+                    </tr>
+                </tbody>
+            </table>
+        </body>
+        
+    </html>
+    <script>
+    //Getting <body> child nodes
+    let docBodyElementsList = document.getElementsByTagName('body')[0].childNodes;
+    
+    //Variables for storing date, day and time
+    let dateContainer, dayContainer, timeContainer;
+    
+    //Iterate over each child nodes of <body>
+    for (let bei = 0,  bei_len = docBodyElementsList.length; bei < bei_len; ++bei) {
+        
+        //Filter elements that have no "class" attribute
+        if (typeof docBodyElementsList[bei].className !== 'undefined' && docBodyElementsList[bei].className != '') {
+            
+            //Filter elements that have "class" attribute value is "center"
+            if ( docBodyElementsList[bei].className.match(/center/) ) {
+                
+                //Getting all <span> elements
+                let spanElementsList = docBodyElementsList[bei].getElementsByTagName('span');
+                
+                //Iterate over all <span> elements
+                for (let sei = 0,  sei_len = spanElementsList.length; sei < sei_len; ++sei) {
+                    
+                    //Filter elements that have no "id" attribute
+                    if ( spanElementsList[sei].id != '' ) {
+                        
+                        //Getting required IDs
+                        switch( spanElementsList[sei].id ) {
+                            case 'dateContainer':
+                                dateContainer = spanElementsList[sei];
+                                break;
+                            case 'dayContainer':
+                                dayContainer = spanElementsList[sei];
+                                break;
+                            case 'timeContainer':
+                                timeContainer = spanElementsList[sei];
+                                break;                                
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    //Getting date
+    let date = new Date();
+    
+    //Formating date in DD/MM/YYYY format
+    let formattedDate = date.getDate().toString().padStart(2, 0) + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+    
+    //Array for days
+    let daysList = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    
+    //Interval for getting live time
+    setInterval( function() {
+        let dateForTime = new Date();
+        let hours = dateForTime.getHours();
+        let ampm = hours <= 12 ? 'AM' : 'PM';
+        hours = hours % 12;
+        
+        //If hours = 0 
+        hours = hours ? hours.toString().padStart(2, 0) : 12;
+        
+        let minutes = dateForTime.getMinutes().toString().padStart(2, 0);
+        let seconds = dateForTime.getSeconds().toString().padStart(2, 0);
+        let time = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
+        
+        //Displaying time
+        timeContainer.innerHTML = time;
+    }, 1000 );
+    
+    //Displaying Date
+    dateContainer.innerHTML = formattedDate;
+    
+    //Displaying Day
+    dayContainer.innerHTML = daysList[ date.getDay() ];  
+    </script>
+</apex:page>
